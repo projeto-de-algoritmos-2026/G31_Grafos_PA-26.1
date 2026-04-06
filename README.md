@@ -9,6 +9,18 @@
 
 ## Comandos
 
+## Dependências
+
+Este projeto foi desenvolvido com as seguintes tecnologias:
+- **Node.js** (recomendado `v18.x` ou versão compatível)
+- **Angular CLI** versão `15.x`
+
+Antes de executar o projeto, instale as dependências do repositório (como o Angular, Leaflet, etc.) rodando o comando abaixo na raiz do projeto:
+
+```bash
+npm install
+```
+
 ## Build
 
 Rode o comando abaixo para buildar o projeto
