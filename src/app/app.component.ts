@@ -166,8 +166,8 @@ export class AppComponent implements OnInit, OnDestroy {
       if (nodeData) {
         const edge = nodeData.neighbors.get(keyB);
         if (edge) {
-          edge.setStyle({ color: '#f44336', weight: 5 }); // Vermelho com espessura 5
-          edge.bringToFront(); // Coloca a linha na frente das linhas azuis
+          edge.setStyle({ color: '#f44336', weight: 5 });
+          edge.bringToFront();
           this.highlightedEdges.push(edge);
         }
       }
@@ -176,7 +176,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private clearHighlightedPath(): void {
     for (const edge of this.highlightedEdges) {
-      edge.setStyle({ color: 'blue', weight: 2 }); // Retorna pro estilo original
+      edge.setStyle({ color: 'blue', weight: 2 });
     }
     this.highlightedEdges = [];
   }

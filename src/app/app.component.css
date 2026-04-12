@@ -1,7 +1,7 @@
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Ocupa exatamente 100% da tela */
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -11,10 +11,10 @@
   justify-content: space-between;
   padding: 0 24px;
   height: 64px;
-  background-color: #1e293b; /* Azul escuro moderno */
+  background-color: #1e293b;
   color: #f8fafc;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  z-index: 1000; /* Garante que a sombra fique sobre o mapa do Leaflet */
+  z-index: 1000;
 }
 
 .brand {
@@ -41,7 +41,7 @@
   color: #f8fafc;
   border: none;
   padding: 8px 16px;
-  border-radius: 9999px; /* Formato de pílula igual ao badge */
+  border-radius: 9999px;
   font-family: inherit;
   font-size: 0.9rem;
   font-weight: 500;
@@ -55,7 +55,7 @@
 
 .status-badge {
   padding: 8px 16px;
-  border-radius: 9999px; /* Formato de pílula */
+  border-radius: 9999px;
   font-size: 0.9rem;
   font-weight: 500;
   color: white;
@@ -64,7 +64,7 @@
 }
 
 .map-container {
-  flex: 1; /* Faz o mapa ocupar todo o espaço restante */
+  flex: 1;
 }
 
 #map {
