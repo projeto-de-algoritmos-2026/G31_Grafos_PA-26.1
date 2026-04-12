@@ -1,0 +1,73 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ocupa exatamente 100% da tela */
+  overflow: hidden;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 64px;
+  background-color: #1e293b; /* Azul escuro moderno */
+  color: #f8fafc;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 1000; /* Garante que a sombra fique sobre o mapa do Leaflet */
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-clear {
+  background-color: #334155;
+  color: #f8fafc;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 9999px; /* Formato de pílula igual ao badge */
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-clear:hover {
+  background-color: #475569;
+}
+
+.status-badge {
+  padding: 8px 16px;
+  border-radius: 9999px; /* Formato de pílula */
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: white;
+  transition: background-color 0.4s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.map-container {
+  flex: 1; /* Faz o mapa ocupar todo o espaço restante */
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}

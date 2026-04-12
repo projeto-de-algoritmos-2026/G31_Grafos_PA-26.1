@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import * as L from 'leaflet';
 import { HttpClient } from '@angular/common/http';
+import { GraphService } from './graph.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,11 @@ export class AppComponent implements OnInit, OnDestroy {
   private markerByKey = new Map<string, L.Marker>();
   private selectedNodeKey: string | null = null;
 
-  constructor(private http: HttpClient) {}
+  private adjacencyList = new Map<string, string[]>();
+  selectionStatus: { text: string; color: string } | null = { text: 'Selecione dois pontos no mapa', color: '#2196f3' };
+  private highlightedEdges: L.Polyline[] = [];
+
+  constructor(private http: HttpClient, private graphService: GraphService) {}
 
   ngOnInit(): void {
     this.initMap();
@@ -119,17 +124,22 @@ export class AppComponent implements OnInit, OnDestroy {
 
         marker.on('click', () => this.onMarkerClick(key));
       });
+      
+      this.buildAdjacencyList();
     });
   }
 
   private onMarkerClick(nodeKey: string): void {
     if (!this.selectedNodeKey) {
+      this.clearHighlightedPath();
       this.selectedNodeKey = nodeKey;
+      this.selectionStatus = { text: 'Ponto de origem selecionado. Selecione o destino.', color: '#ff9800' };
       return;
     }
 
     if (this.selectedNodeKey === nodeKey) {
       this.selectedNodeKey = null;
+      this.selectionStatus = { text: 'Selecione dois pontos no mapa', color: '#2196f3' };
       return;
     }
 
@@ -137,14 +147,50 @@ export class AppComponent implements OnInit, OnDestroy {
     const toKey = nodeKey;
     this.selectedNodeKey = null;
 
-    const fromNode = this.graph.get(fromKey);
-    if (!fromNode) {
-      return;
+    const path = this.graphService.hasPath(fromKey, toKey, this.adjacencyList);
+    
+    if (path) {
+      this.selectionStatus = { text: 'Existe um caminho entre os pontos! (Conexos)', color: '#4caf50' };
+      this.highlightPath(path);
+    } else {
+      this.selectionStatus = { text: 'Não existe caminho entre os pontos (Desconexos)', color: '#f44336' };
     }
+  }
 
-    const edge = fromNode.neighbors.get(toKey);
-    if (edge) {
-      edge.setStyle({ color: 'red' });
+  private highlightPath(path: string[]): void {
+    for (let i = 0; i < path.length - 1; i++) {
+      const keyA = path[i];
+      const keyB = path[i + 1];
+      const nodeData = this.graph.get(keyA);
+      
+      if (nodeData) {
+        const edge = nodeData.neighbors.get(keyB);
+        if (edge) {
+          edge.setStyle({ color: '#f44336', weight: 5 }); // Vermelho com espessura 5
+          edge.bringToFront(); // Coloca a linha na frente das linhas azuis
+          this.highlightedEdges.push(edge);
+        }
+      }
     }
+  }
+
+  private clearHighlightedPath(): void {
+    for (const edge of this.highlightedEdges) {
+      edge.setStyle({ color: 'blue', weight: 2 }); // Retorna pro estilo original
+    }
+    this.highlightedEdges = [];
+  }
+
+  private buildAdjacencyList(): void {
+    this.adjacencyList.clear();
+    this.graph.forEach((data, key) => {
+      this.adjacencyList.set(key, Array.from(data.neighbors.keys()));
+    });
+  }
+
+  clearSelection(): void {
+    this.selectedNodeKey = null;
+    this.selectionStatus = { text: 'Selecione dois pontos no mapa', color: '#2196f3' };
+    this.clearHighlightedPath();
   }
 }

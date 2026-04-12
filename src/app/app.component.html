@@ -1,5 +1,21 @@
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  PA - Ruas do Gama
-  <div id="map" style="height: 100vh;"></div>
+<div class="app-container">
+  <header class="toolbar">
+    <div class="brand">
+      <span class="icon">🗺️</span>
+      <h1>PA - Ruas do Gama</h1>
+    </div>
+    
+    <div class="actions">
+      <div class="status-badge"
+           *ngIf="selectionStatus"
+           [style.background-color]="selectionStatus.color">
+        {{ selectionStatus.text }}
+      </div>
+      <button class="btn-clear" (click)="clearSelection()">Limpar Pesquisa</button>
+    </div>
+  </header>
+
+  <main class="map-container">
+    <div id="map"></div>
+  </main>
 </div>
