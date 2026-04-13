@@ -66,3 +66,8 @@ Selecionando pontos sem conexão
 <img width="1303" height="627" alt="image" src="https://github.com/user-attachments/assets/1be6850b-1704-4e6a-8985-5156039cf7d7" />
 
 <img width="1303" height="627" alt="image" src="https://github.com/user-attachments/assets/6f6f7583-5f0c-4eff-889a-2907767a91ab" />
+
+
+## Link do Vídeo
+
+Os autores gravaram um vídeo mostrando a aplicação, o vídeo está disponível neste [link](https://drive.google.com/file/d/161o5P4zWan-omRQN1jwVUdqVNT7emS39/view?usp=sharing)
